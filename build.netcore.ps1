@@ -3,9 +3,9 @@
     [Parameter(Position = 0)] 
     [string] $Target = "netcore31",
     [Parameter(Position = 1)]
-    [string] $Version = "89.0.60",
+    [string] $Version = "90.1.10",
     [Parameter(Position = 2)]
-    [string] $AssemblyVersion = "89.0.60"
+    [string] $AssemblyVersion = "90.1.10"
 )
 
 $WorkingDir = split-path -parent $MyInvocation.MyCommand.Definition
@@ -91,7 +91,7 @@ function Msvs
         [string] $Configuration, 
 
         [Parameter(Position = 1, ValueFromPipeline = $true)]
-        [ValidateSet('x86', 'x64')]
+        [ValidateSet('x86', 'x64', 'arm64')]
         [string] $Platform
     )
 
@@ -178,6 +178,7 @@ function Compile
     # Compile
     Msvs 'Release' 'x64'
     Msvs 'Release' 'x86'
+    Msvs 'Release' 'arm64'
 }
 
 function Nupkg
